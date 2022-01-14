@@ -1,26 +1,27 @@
 import sys
 def main():
+    
+    N = int(sys.stdin.readline()) 
     weight=[]
     height=[]
-    index =[]
-    N = int(sys.stdin.readline())
+    index = []
     for i in range(0,N):
         x, y = map(int, sys.stdin.readline().split(" "))
         weight.append(x)
         height.append(y)
-        index.append(0)
+        index.append(1)
     
-    grade = 1
-    i = weight.index(max(weight)) # weight에서 가장 큰 값 index
-    index[i]=grade
-    
-    for k in range(0,N):
-        if weight[i] == weight[k]:
-            
-            
-            weight[k]=0
-            
-        
+    for i in range(0,N):
+        for j in range(0,N):
+            if weight[i] < weight[j] and height[i] < height[j]:
+                index[i]+=1
+                
+    for i in index:
+        print(i,end = " ")
         
 main()
+
+
+
+
 
