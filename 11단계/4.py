@@ -27,15 +27,14 @@ def main():
                             count_2+=1
             if (count_1 < new_1):  
                 new_1 = count_1
-            elif (count_2 < new_2):
+            if (count_2 < new_2):
                 new_2 = count_2
+  
     if (new_1 < new_2):
         print(new_1)
     else:
         print(new_2) 
-                
-    
-        
+
 main()
 
 
