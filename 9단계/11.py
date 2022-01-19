@@ -17,6 +17,19 @@ def count_position(x1, y1, r1, x2, y2, r2):
         return 0
     else: # 두점에서 만나는 경우
         return 2
+
+# renew 한 거 => 불필요한 변수 없앰
+def count_position_renew(x1, y1, r1, x2, y2, r2):  
+    len = math.sqrt((x1-x2)**2+ (y1-y2)**2) # 점과 점사이의 거리
+    distance = abs(r1-r2)
+    if (x1, y1) == (x2, y2) and r1 == r2: # 일치하면 무한대 
+        return -1
+    elif len == r1+r2 or len == distance: # 한점에서 만나는 경우
+        return 1
+    elif r1+r2 < len < distance: # 안만나는 경우
+        return 0
+    else: # 두점에서 만나는 경우
+        return 2
     
 def main():
     T = int(sys.stdin.readline())
