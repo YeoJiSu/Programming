@@ -1,22 +1,30 @@
 import sys
 import math
-def mod(arr):
-    # num = math.ceil(math.sqrt(sorted(arr)[-1]))
-    for i in range(2,sorted(arr)[-2]):# 배열중에 젤 작은 애까지 나눠본다
-        correct = True
-        for k in range(0, len(arr)-1):
-            if arr[k]%i != arr[k+1]%i:
-                correct = False
-                break
-        if correct:
-            print(i, end = " ")
-        
 
+def mod(arr):
+    interval = []
+    for i in range(1,len(arr)):
+        interval.append(arr[i]-arr[i-1])
+    
+    my_gcd = interval[0]
+    for i in range(1, len(interval)):
+        my_gcd = math.gcd(my_gcd, interval[i])
+
+    answer = []
+    for i in range(2, int(math.sqrt(my_gcd))+1):
+        if my_gcd%i==0:
+            answer.append(i)
+            answer.append(int(my_gcd/i))
+    answer.append(my_gcd)
+    answer = sorted(list(set(answer)))
+    print(*answer)
+    
+    
 def main():
     num = int(sys.stdin.readline())
     arr = []
     for i in range(0,num):
         a = int(sys.stdin.readline())
         arr.append(a)
-    mod(arr)
+    mod(sorted(arr))
 main()
