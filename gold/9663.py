@@ -1,30 +1,34 @@
 import sys
-
+num = 0
 count = 0
+board = []
+visit = []
 
 def main():
+    global num,board,visit
     num = int(sys.stdin.readline())
-    col = [0] * (num+1) # 9
-    n_queens(0,col)
+    board = [0]*num
+    visit = [False]*num
+    dfs(0)
     print(count)
     
-def n_queens(i, col):
-    n = len(col)-1 # 8
-    
-    if (is_correct(i,col)):
-        if i == n:
-            global count
-            count+=1
-        else:
-            for j in range(1, n+1): # 1부터 8까지 넣어보는겨
-                col[i+1] = j
-                n_queens(i+1,col)
-
-def is_correct(i, col):
-    k = 1
-    while k<i:
-        if (col[i]==col[k] or abs(col[i]-col[k])==i-k):
+def dfs(x):
+    global count
+    if x == num:
+        count+=1
+        return 
+    for i in range(num):
+        if visit[i]==False:
+            board[x]=i
+            if isAvailable(x):
+                visit[i]=True
+                dfs(x+1)
+                visit[i]=False
+                
+def isAvailable(x):
+    for i in range(x):
+        if board[x] == board[i] or abs(board[x]-board[i]) == x-i:
             return False
-        k+=1
     return True
+
 main()
