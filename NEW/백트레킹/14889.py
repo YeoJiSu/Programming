@@ -24,4 +24,30 @@ for index in range(len(half)):
                 second += team[line2[x]][line2[y]]
     min_value = min(min_value, abs(first-second))
    
-print(min_value)
+print("브루트포스로 푼 결과:",min_value)
+
+# 백트레킹으로 풀기
+min_value = 1e9
+visited = [0 for i in range(N)]
+def dfs(depth, i):
+    global team, min_value
+    first = 0
+    second = 0
+    if depth == N//2 :
+        for x in range(N):
+            for y in range(N):
+                if x!=y:
+                    if visited[x] == 1 and visited[y]==1:
+                        first+=team[x][y]
+                    if visited[x] == 0 and visited[y]==0:
+                        second+=team[x][y]
+        min_value = min(min_value, abs(first-second))
+    for k in range(i,N):
+        if visited[k] == 0:
+            visited[k] = 1
+            dfs(depth+1,k+1)
+            visited[k] = 0
+
+dfs(0,0)
+
+print("백트레킹으로 푼 결과:",min_value)
