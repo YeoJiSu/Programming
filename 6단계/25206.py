@@ -1,3 +1,5 @@
+# [2022 인하대학교 프로그래밍 경진대회(IUPC) B번] 너의 평점은
+
 import sys
 grade_standard = {
     'A+':4.5,
